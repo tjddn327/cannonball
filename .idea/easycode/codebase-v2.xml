@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/src/main/java/com/nhnacademy/cannongame/Ball.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/main/java/com/nhnacademy/cannongame/BallWorldApp.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/main/java/com/nhnacademy/cannongame/MovableBall.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/main/java/com/nhnacademy/cannongame/PaintableBall.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/main/java/com/nhnacademy/cannongame/Point.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/main/java/com/nhnacademy/cannongame/World.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/test/java/com/nhnacademy/cannongame/BallTest.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/test/java/com/nhnacademy/cannongame/PaintableBallTest.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/test/java/com/nhnacademy/cannongame/PointTest.java;C:/Users/USER/Desktop/과제파일모음/2025 2학기/NHN/cannonball/src/test/java/com/nhnacademy/cannongame/WorldTest.java" />
+  </component>
+</project>

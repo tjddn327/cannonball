@@ -3,6 +3,7 @@ package com.nhnacademy.cannongame;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import javafx.scene.canvas.GraphicsContext;
 
 public class World {
     private final int width;
@@ -21,20 +22,17 @@ public class World {
         if (ball == null) {
             throw new IllegalArgumentException("ball == null");
         }
-        if(ball.getCenter().getX() - ball.getRadius() < 0 || ball.getCenter().getY() - ball.getRadius() < 0){
-            throw new IllegalArgumentException("0보다 커야함");
-        } else if(ball.getCenter().getX() + ball.getRadius() > width){
-            throw new IllegalArgumentException("월드의 너비보다 작거나 같아야함");
-        } else if(ball.getCenter().getY() + ball.getRadius() > height){
-            throw new IllegalArgumentException("월드의 높이보다 작거나 같아야함");
+
+        if (!isInBounds(ball)) {
+            throw new IllegalArgumentException("공이 월드 경계를 벗어납니다.");
         }
 
         this.balls.add(ball);
     }
 
     public void remove(Ball ball){
-        if(ball == null){
-            throw new NoSuchElementException("ball == null");
+        if (!this.balls.contains(ball)) {
+            throw new NoSuchElementException("제거할 공이 월드에 존재하지 않습니다.");
         }
 
         this.balls.remove(ball);
@@ -60,5 +58,21 @@ public class World {
         return height;
     }
 
-    private void isInBounds(Ball ball){}
+    public void draw(GraphicsContext gc){
+        gc.clearRect(0, 0, getWidth(), getHeight());
+
+        for(Ball ball : balls){
+            if (ball instanceof PaintableBall){
+                ((PaintableBall) ball).draw(gc);
+            }
+        }
+    }
+
+    private boolean isInBounds(Ball ball){
+        Point center = ball.getCenter();
+        double radius = ball.getRadius();
+
+        return (center.getX() - radius >= 0) && (center.getX() + radius <= this.width) &&
+                (center.getY() - radius >= 0) && (center.getY() + radius <= this.height);
+    }
 }

@@ -7,7 +7,7 @@ public class Ball {
     // 생성자 - 위치 지정 필수
     public Ball(Point center, double radius) {
         if(radius <= 0) {
-            throw new IllegalArgumentException("반지름은 음수가 안대여~");
+            throw new IllegalArgumentException("반지름은 음수가 안됩니다.");
         }
         if(center == null) {
             throw new NullPointerException("팍씨 눌쓰지말라고");
@@ -63,6 +63,31 @@ public class Ball {
     // contains 메서드
     public boolean contains(double x, double y) {
         return contains(new Point(x, y)); // 위에꺼 호출해서 하는거
+    }
+
+    public double getArea(){
+        return Math.PI * Math.pow(this.radius, 2);
+    }
+
+    public double getCir(){
+        return 2 * Math.PI * this.radius;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Ball(center=%s, radius=%.1f)", center.toString(), radius);
+    }
+
+    public boolean isColliding(Ball other){
+        if(other == null){
+            return false;
+        }
+
+        double dis = this.getCenter().distanceTo(other.getCenter());
+
+        double sum = this.getRadius() + other.getRadius();
+
+        return dis < sum;
     }
 
 }

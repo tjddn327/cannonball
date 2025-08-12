@@ -22,11 +22,26 @@ public class PaintableBall extends Ball {
     public Color getColor(){
         return color;
     }
+
     public void setColor(Color color){
         if(color == null) {
             throw new NullPointerException("색상은 Null No");
         }
         this.color = color;
+    }
+
+    public PaintableBall(Point point, double radius, Color color){
+        super(point, radius);
+
+        if(color == null) {
+            throw new IllegalArgumentException("색상은 Null No");
+        }
+        this.color = color;
+
+    }
+
+    public PaintableBall(Point point, double radius){
+        this(point, radius, Color.RED);
     }
 
     public void draw(GraphicsContext gc) {
@@ -37,7 +52,7 @@ public class PaintableBall extends Ball {
                    getRadius() * 2);
 
         gc.setStroke(Color.BLACK);
-        gc.fillOval(getCenter().getX() - getRadius(),
+        gc.strokeOval(getCenter().getX() - getRadius(),
                 getCenter().getY() - getRadius(),
                 getRadius() * 2,
                 getRadius() * 2);

@@ -25,4 +25,13 @@ public class Point {
         // sqrt((x2-x1)² + (y2-y1)²)
         return Math.sqrt(Math.pow(this.x - other.getX(), 2) + Math.pow(this.y - other.getY(), 2));
     }
+
+    public Point add(Vector2D vector) {
+        return new Point(x + vector.getX(), y + vector.getY());
+    }
+
+    public Vector2D subtract(Point other) {
+        return new Vector2D(x - other.x, y - other.y);
+    }
+
 }

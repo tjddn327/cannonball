@@ -1,5 +1,6 @@
 package com.nhnacademy.cannongame;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,5 +81,24 @@ public class BallTest {
         // 경계선상의 점 (반지름 거리)
         assertTrue(ball.contains(150, 100), "경계선상의 점이 포함되지 않았습니다");
         assertTrue(ball.contains(linePoint), "경계선상의 점이 포함되지 않았습니다");
+    }
+
+    @Test
+    @DisplayName("공 생성 시 반지름이 음수면 예외 발생")
+    public void testNegativeRadius() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Ball(0, 0, -5),
+                "반지름이 음수일 때 예외가 발생해야 합니다"
+        );
+    }
+
+    @Test
+    @DisplayName("World에 공 추가 테스트")
+    public void testWorldAddBall() {
+        World world = new World(500, 500);
+        Ball ball = new Ball(new Point(250, 250), 20);
+
+        world.add(ball);
+        assertEquals(1, world.getBalls().size());
     }
 }
