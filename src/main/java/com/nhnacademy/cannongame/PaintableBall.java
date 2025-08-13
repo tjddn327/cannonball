@@ -25,9 +25,10 @@ public class PaintableBall extends Ball {
 
     public void setColor(Color color){
         if(color == null) {
-            throw new NullPointerException("색상은 Null No");
+            this.color = Color.RED;
+        }else {
+            this.color = color;
         }
-        this.color = color;
     }
 
     public PaintableBall(Point point, double radius, Color color){

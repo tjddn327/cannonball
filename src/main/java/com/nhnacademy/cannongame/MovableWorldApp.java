@@ -71,6 +71,8 @@ public class MovableWorldApp extends Application {
 
                 MovableBallV2 ball = new MovableBallV2(new Point(x, y), radius, color, velocity);
 
+                ball.setVelocity(velocity);
+
                 world.add(ball);
             } catch (IllegalArgumentException ignore) {
                 i--;

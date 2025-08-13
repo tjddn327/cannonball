@@ -30,6 +30,8 @@ public class Point {
         return new Point(x + vector.getX(), y + vector.getY());
     }
 
+    public Point subtract(Vector2D vector) {return new Point(x - vector.getX(), y - vector.getY());}
+
     public Vector2D subtract(Point other) {
         return new Vector2D(x - other.x, y - other.y);
     }

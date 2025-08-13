@@ -1,6 +1,8 @@
 package com.nhnacademy.cannongame;
 
 public class Ball {
+
+
     private Point center;
     private double radius;
 
@@ -26,6 +28,10 @@ public class Ball {
     public Point getCenter() {
         // TODO: center 반환
         return center; // 반환해준다메
+    }
+
+    public void setCenter(Point center) {
+        this.center = center;
     }
 
     public double getRadius() {

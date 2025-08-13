@@ -28,6 +28,14 @@ public class MovableBallV2 extends PaintableBall {
     }
 
 
+    public void setVelocity(Vector2D velocity) {
+        if (velocity == null) {
+            throw new IllegalArgumentException("속도 벡터는 null일 수 없습니다.");
+        }
+        this.velocity = velocity;
+    }
+
+
     public void applyForce(Vector2D force) {
         // 질량(mass)을 간단히 반지름으로 가정합니다.
         double mass = getRadius();

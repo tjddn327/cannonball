@@ -1,6 +1,8 @@
 package com.nhnacademy.cannongame;
 
 public class Vector2D {
+
+
     private double x;
     private double y;
 
@@ -19,8 +21,16 @@ public class Vector2D {
         return x;
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
     public double getY() {
         return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     public Vector2D add(Vector2D other){
