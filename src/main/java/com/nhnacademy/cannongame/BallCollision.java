@@ -18,7 +18,7 @@ public class BallCollision {
      * @param ball1
      * @param ball2
      */
-    private static void separateBalls(Ball ball1, Ball ball2){
+    static void separateBalls(Ball ball1, Ball ball2){
         double distance = ball1.getCenter().distanceTo(ball2.getCenter());
         double overlap = (ball1.getRadius() + ball2.getRadius()) - distance; //겹침의 정도
 
@@ -33,7 +33,7 @@ public class BallCollision {
         }
 
         if(ball2 instanceof MovableBall){
-            Point newCenter2 = ball2.getCenter().subtract(normal.multiply(overlap / 2));
+            Point newCenter2 = ball2.getCenter().add(normal.multiply(overlap / 2));
             ((MovableBall) ball2).moveTo(newCenter2); //형변환해서 움직이는 공으로 만들기 -> 계산된 새 위치로 즉시이동
         }
 

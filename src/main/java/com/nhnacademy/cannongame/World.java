@@ -19,13 +19,13 @@ public class World {
     }
 
     public void add(Ball ball) {
-        if (ball == null) {
-            throw new IllegalArgumentException("ball == null");
-        }
-
-        if (!isInBounds(ball)) {
-            throw new IllegalArgumentException("공이 월드 경계를 벗어납니다.");
-        }
+//        if (ball == null) {
+//            throw new IllegalArgumentException("ball == null");
+//        }
+//
+//        if (!isInBounds(ball)) {
+//            throw new IllegalArgumentException("공이 월드 경계를 벗어납니다.");
+//        }
 
         this.balls.add(ball);
     }

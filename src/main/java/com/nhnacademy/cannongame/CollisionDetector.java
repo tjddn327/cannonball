@@ -1,92 +1,84 @@
 package com.nhnacademy.cannongame;
 
 public class CollisionDetector {
-    public static class WallCollision{
-        public enum Wall {
-            TOP,
-            BOTTOM,
-            LEFT,
-            RIGHT
-        }
-        public Wall wall;
-        public double penetration;
 
-        public WallCollision(Wall wall, double penetration){
+    public enum Wall {
+        TOP,
+        BOTTOM,
+        LEFT,
+        RIGHT
+    }
+
+    public static class WallCollision {
+        private final Wall wall;
+        private final double penetration;
+
+        public WallCollision(Wall wall, double penetration) {
             this.wall = wall;
             this.penetration = penetration;
         }
 
+        public Wall getWall() {
+            return this.wall;
+        }
+
+        public double getPenetration() {
+            return this.penetration;
+        }
     }
 
-    /**
-     * 충돌했는가?
-     * @param ball
-     * @param minX
-     * @param minY
-     * @param maxX
-     * @param maxY
-     * return 각 방향 없으면 null
-     */
-    public static WallCollision checkWallCollision(BoundedBall ball, double minX, double minY, double maxX, double maxY){
+    public static WallCollision checkWallCollision(BoundedBall ball, double minX, double minY, double maxX, double maxY) {
         double ballX = ball.getCenter().getX();
         double ballY = ball.getCenter().getY();
-        double ballR = ball.getRadius();
+        double radius = ball.getRadius();
 
-        double bL = minX - (ballX - ballR);
-        double bR = maxX - (ballX - ballR);
-        double bT = minY - (ballY - ballR);
-        double bB = maxY - (ballY - ballR);
+        double penetration;
 
-        if(bL > 0){
-            return new WallCollision(WallCollision.Wall.LEFT, bL);
+        // 왼쪽 벽
+        if ((penetration = (minX + radius) - ballX) > 0) {
+            return new WallCollision(Wall.LEFT, penetration);
         }
-
-        if(bR > 0){
-            return new WallCollision(WallCollision.Wall.RIGHT, bR);
+        // 3. 오른쪽 벽 침투 계산 로직 수정
+        if ((penetration = (ballX + radius) - maxX) > 0) {
+            return new WallCollision(Wall.RIGHT, penetration);
         }
-        if(bT > 0){
-            return new WallCollision(WallCollision.Wall.TOP, bT);
+        // 위쪽 벽
+        if ((penetration = (minY + radius) - ballY) > 0) {
+            return new WallCollision(Wall.TOP, penetration);
         }
-        if(bB > 0){
-            return new WallCollision(WallCollision.Wall.BOTTOM, bB);
+        // 4. 아래쪽 벽 침투 계산 로직 수정
+        if ((penetration = (ballY + radius) - maxY) > 0) {
+            return new WallCollision(Wall.BOTTOM, penetration);
         }
 
         return null;
     }
 
-
-    /**
-     * 상하좌우 반응
-     * @param ball
-     * @param collision
-     */
-    public static void resolveWallCollision(BoundedBall ball, WallCollision collision){
-        if(collision == null){
+    public static void resolveWallCollision(BoundedBall ball, WallCollision collision) {
+        if (collision == null) {
             return;
         }
 
+        Vector2D v = ball.getVelocity();
+        Point p = ball.getCenter();
+
         switch (collision.wall) {
             case LEFT:
-                ball.getVelocity().setX(-ball.getVelocity().getX()); //반전
-                ball.setCenter(new Point(ball.getCenter().getX() + collision.penetration, ball.getCenter().getY())); //위치 보정 오른쪽밀기
+                v.setX(-v.getX());
+                ball.moveTo(new Point(p.getX() + collision.penetration, p.getY()));
                 break;
-
             case RIGHT:
-                ball.getVelocity().setX(-ball.getVelocity().getX());
-                ball.setCenter(new Point(ball.getCenter().getX() - collision.penetration, ball.getCenter().getY())); //위치 보정 왼쪽 밀기
+                v.setX(-v.getX());
+                ball.moveTo(new Point(p.getX() - collision.penetration, p.getY()));
                 break;
-
             case TOP:
-                ball.getVelocity().setY(-ball.getVelocity().getY());
-                ball.setCenter(new Point(ball.getCenter().getY() + collision.penetration, ball.getCenter().getY()));
+                v.setY(-v.getY());
+                ball.moveTo(new Point(p.getX(), p.getY() + collision.penetration));
                 break;
-
             case BOTTOM:
-                ball.getVelocity().setY(-ball.getVelocity().getY());
-                ball.setCenter(new Point(ball.getCenter().getY() - collision.penetration, ball.getCenter().getY()));
+                v.setY(-v.getY());
+                ball.moveTo(new Point(p.getX(), p.getY() - collision.penetration));
                 break;
-
         }
     }
 }
-
